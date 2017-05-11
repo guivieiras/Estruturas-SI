@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UFSC.Extension;
 
 namespace Tree {
     class BinaryTree<T> where T : IComparable {
@@ -38,38 +39,37 @@ namespace Tree {
             Console.WriteLine(string.Join(", ", tree2.InOrder()));
 
 
-
+            Console.WriteLine();
 
             System.Diagnostics.Stopwatch s = new System.Diagnostics.Stopwatch();
+
             s.Start();
-
             string xxa = string.Join(", ", tree3.InOrder());
-
             s.Stop();
-            Console.WriteLine(s.Elapsed);
+            Console.WriteLine("InOrder:".MetricJoin(s.Elapsed.ToString(), 19));
 
             s.Restart();
             string xa = string.Join(", ", tree3.RecursiveInOrder());
             s.Stop();
-            Console.WriteLine(s.Elapsed);
+            Console.WriteLine("RecursiveInOrder:".MetricJoin(s.Elapsed.ToString(), 19));
 
             s.Restart();
             tree3.PrintInOrder1();
             string xbaa = string.Join(", ", tree3.x);
             s.Stop();
-
-            Console.WriteLine(s.Elapsed);
+            Console.WriteLine("Print int order 1:".MetricJoin(s.Elapsed.ToString(), 19));
 
 
             BinaryTree<int> tre = new BinaryTree<int>();
-            tre.RecursiveAdd(5, 1, 4, 9, 2, 3, 8, 6, 7);
+            //tre.RecursiveAdd(5, 1, 4, 9, 2, 3, 8, 6, 7);
 
 
-            s.Restart();            
-            tre.PrintInOrder2();
+            s.Restart();
+            tree3.PrintInOrder2();
+            string ax = string.Join(", ", tree3.z);
             s.Stop();
+            Console.WriteLine("Print int order 2:".MetricJoin(s.Elapsed.ToString(), 19));
 
-            Console.WriteLine(s.Elapsed);
         }
 
         public void Add(params T[] value) {
@@ -159,15 +159,14 @@ namespace Tree {
             PrintInOrder1(root);
         }
         public void PrintInOrder2() {
-            Console.WriteLine();
-            PrintInOrder2(first);
-            Console.WriteLine();
+            PrintInOrder2(root);
         }
         public IEnumerable<T> RecursiveInOrder() {
             return RecursiveInOrder(root);
         }
 
         public List<T> x = new List<T>();
+        public List<T> z = new List<T>();
         public void PrintInOrder1(BinaryTreeElement<T> iterator) {
             if (iterator.Left != null) PrintInOrder1(iterator.Left);
             x.Add(iterator.Value);
@@ -176,7 +175,7 @@ namespace Tree {
 
         private void PrintInOrder2(BinaryTreeElement<T> previous) {
             if (previous.Left != null) PrintInOrder2(previous.Left);
-            Console.WriteLine(previous.Value);
+            z.Add(previous.Value);
             if (previous.Right != null) PrintInOrder2(previous.Right);
         }
   
