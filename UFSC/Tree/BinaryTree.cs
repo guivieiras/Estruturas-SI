@@ -59,8 +59,68 @@ namespace Tree {
             s.Stop();
             Console.WriteLine(s.Elapsed);
         }
+        tree.Add(5, 1, 4, 9, 2, 3, 8, 6, 7);
+            tree.PrintInOrdeer();
+        }
 
-        public void Add(params T[] value) {
+    public void Add(params T[] value) {
+        foreach (var x in value) {
+            if (first == null) {
+                BinaryTreeElement<T> el = new BinaryTreeElement<T>(x);
+                first = el;
+                root = el;
+
+            } else
+                RecursiveAdd(root, x);
+        }
+    }
+
+    private void RecursiveAdd(BinaryTreeElement<T> previous, T value) {
+        if (value.CompareTo(previous.Value) == -1) {
+            if (previous.Left == null) {
+                BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
+                previous.Left = el;
+                el.Parent = previous;
+                if (first.Value.CompareTo(value) == 1)
+                    first = el;
+
+            } else {
+                RecursiveAdd(previous.Left, value);
+            }
+        }
+        if (value.CompareTo(previous.Value) == 1) {
+            if (previous.Right == null) {
+                BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
+                previous.Right = el;
+                el.Parent = previous;
+            } else {
+                RecursiveAdd(previous.Right, value);
+            }
+        }
+    }
+
+    public IEnumerable InOrder() {
+        foreach (var x in InOrder(first)) {
+            yield return x;
+        }
+    }
+
+    private IEnumerable InOrder(BinaryTreeElement<T> previous) {
+        return null;
+    }
+
+    public void PrintInOrdeer() {
+        PrintInOrder(root);
+    }
+
+    private void PrintInOrder(BinaryTreeElement<T> previous) {
+        if (previous.Left != null) PrintInOrder(previous.Left);
+        Console.WriteLine(previous.Value);
+        if (previous.Right != null) PrintInOrder(previous.Right);
+    }
+
+
+    public void Add(params T[] value) {
             foreach (var v in value)
                 Add(v);
 
