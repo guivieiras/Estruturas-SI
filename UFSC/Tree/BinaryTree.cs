@@ -49,114 +49,48 @@ namespace Tree {
             Console.WriteLine(s.Elapsed);
 
             s.Restart();
-            string xa = string.Join(", ", tree3.WEIUQHI());
+            string xa = string.Join(", ", tree3.RecursiveInOrder());
             s.Stop();
             Console.WriteLine(s.Elapsed);
 
             s.Restart();
-            tree3.dwa();
+            tree3.PrintInOrder1();
             string xbaa = string.Join(", ", tree3.x);
             s.Stop();
+
+            Console.WriteLine(s.Elapsed);
+
+
+            BinaryTree<int> tre = new BinaryTree<int>();
+            tre.RecursiveAdd(5, 1, 4, 9, 2, 3, 8, 6, 7);
+
+
+            s.Restart();            
+            tre.PrintInOrder2();
+            s.Stop();
+
             Console.WriteLine(s.Elapsed);
         }
-        tree.Add(5, 1, 4, 9, 2, 3, 8, 6, 7);
-            tree.PrintInOrdeer();
-        }
 
-    public void Add(params T[] value) {
-        foreach (var x in value) {
-            if (first == null) {
-                BinaryTreeElement<T> el = new BinaryTreeElement<T>(x);
-                first = el;
-                root = el;
-
-            } else
-                RecursiveAdd(root, x);
-        }
-    }
-
-    private void RecursiveAdd(BinaryTreeElement<T> previous, T value) {
-        if (value.CompareTo(previous.Value) == -1) {
-            if (previous.Left == null) {
-                BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
-                previous.Left = el;
-                el.Parent = previous;
-                if (first.Value.CompareTo(value) == 1)
-                    first = el;
-
-            } else {
-                RecursiveAdd(previous.Left, value);
-            }
-        }
-        if (value.CompareTo(previous.Value) == 1) {
-            if (previous.Right == null) {
-                BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
-                previous.Right = el;
-                el.Parent = previous;
-            } else {
-                RecursiveAdd(previous.Right, value);
-            }
-        }
-    }
-
-    public IEnumerable InOrder() {
-        foreach (var x in InOrder(first)) {
-            yield return x;
-        }
-    }
-
-    private IEnumerable InOrder(BinaryTreeElement<T> previous) {
-        return null;
-    }
-
-    public void PrintInOrdeer() {
-        PrintInOrder(root);
-    }
-
-    private void PrintInOrder(BinaryTreeElement<T> previous) {
-        if (previous.Left != null) PrintInOrder(previous.Left);
-        Console.WriteLine(previous.Value);
-        if (previous.Right != null) PrintInOrder(previous.Right);
-    }
-
-
-    public void Add(params T[] value) {
+        public void Add(params T[] value) {
             foreach (var v in value)
                 Add(v);
-
-            //  inOrderPrint(root);
         }
         public void Add(IEnumerable<T> value) {
             foreach (var v in value)
                 Add(v);
         }
 
-        public IEnumerable<T> WEIUQHI() {
-            return inOrderPrint(first);
-        }
-        public void dwa() {
-            inOrderPrint2(first);
-        }
-        public List<T> x = new List<T>();
-        public void inOrderPrint2(BinaryTreeElement<T> iterator) {
-            //traverse left if exists
-            if (iterator.Left != null) inOrderPrint2(iterator.Left);   
-            //record root
-            x.Add(iterator.Value);
-            //traverse right if exists
-            if (iterator.Right != null) inOrderPrint2(iterator.Right); 
-        }
+        public void RecursiveAdd(params T[] value) {
+            foreach (var x in value) {
+                if (first == null) {
+                    BinaryTreeElement<T> el = new BinaryTreeElement<T>(x);
+                    first = el;
+                    root = el;
 
-        public IEnumerable<T> inOrderPrint(BinaryTreeElement<T> iterator) {
-            if (iterator.Left != null)
-                foreach (var x in inOrderPrint(iterator.Left))
-                    yield return x;                                    //traverse left if exists
-            yield return iterator.Value;                                 //record root
-            if (iterator.Right != null)
-                foreach (var x in inOrderPrint(iterator.Right))
-                    yield return x;
-
-            //traverse right if exists
+                } else
+                    RecursiveAdd(root, x);
+            }
         }
 
         public void Add(T value) {
@@ -195,6 +129,67 @@ namespace Tree {
                     }
                 }
             }
+        }
+
+        private void RecursiveAdd(BinaryTreeElement<T> previous, T value) {
+            if (value.CompareTo(previous.Value) == -1) {
+                if (previous.Left == null) {
+                    BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
+                    previous.Left = el;
+                    el.Parent = previous;
+                    if (first.Value.CompareTo(value) == 1)
+                        first = el;
+
+                } else {
+                    RecursiveAdd(previous.Left, value);
+                }
+            }
+            if (value.CompareTo(previous.Value) == 1) {
+                if (previous.Right == null) {
+                    BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
+                    previous.Right = el;
+                    el.Parent = previous;
+                } else {
+                    RecursiveAdd(previous.Right, value);
+                }
+            }
+        }
+
+        public void PrintInOrder1() {
+            PrintInOrder1(root);
+        }
+        public void PrintInOrder2() {
+            Console.WriteLine();
+            PrintInOrder2(first);
+            Console.WriteLine();
+        }
+        public IEnumerable<T> RecursiveInOrder() {
+            return RecursiveInOrder(root);
+        }
+
+        public List<T> x = new List<T>();
+        public void PrintInOrder1(BinaryTreeElement<T> iterator) {
+            if (iterator.Left != null) PrintInOrder1(iterator.Left);
+            x.Add(iterator.Value);
+            if (iterator.Right != null) PrintInOrder1(iterator.Right);
+        }
+
+        private void PrintInOrder2(BinaryTreeElement<T> previous) {
+            if (previous.Left != null) PrintInOrder2(previous.Left);
+            Console.WriteLine(previous.Value);
+            if (previous.Right != null) PrintInOrder2(previous.Right);
+        }
+  
+
+        public IEnumerable<T> RecursiveInOrder(BinaryTreeElement<T> iterator) {
+            if (iterator.Left != null)
+                foreach (var x in RecursiveInOrder(iterator.Left))
+                    yield return x;                                   
+            yield return iterator.Value;                                 
+            if (iterator.Right != null)
+                foreach (var x in RecursiveInOrder(iterator.Right))
+                    yield return x;
+
         }
 
         public IEnumerable<T> InOrder() {
