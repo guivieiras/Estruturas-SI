@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests {
+namespace Elements {
     public class DoublyLinkedKeyValue<K, V>  {
         public K ID;
         public V Value;

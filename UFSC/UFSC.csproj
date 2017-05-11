@@ -7,8 +7,8 @@
     <ProjectGuid>{F201ECB8-5454-4642-82CE-944993D25F43}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>UFSC</RootNamespace>
+    <AssemblyName>UFSC</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -51,7 +51,7 @@
     <Compile Include="DEQUE\DoublyLinkedDeque.cs" />
     <Compile Include="Elements\DoublyLinkedElement.cs" />
     <Compile Include="Elements\DoublyLinkedKeyValue.cs" />
-    <Compile Include="Stack\Fila.cs" />
+    <Compile Include="Queue\Fila.cs" />
     <Compile Include="DEQUE\LinkedDeque.cs" />
     <Compile Include="Elements\LinkedElement.cs" />
     <Compile Include="Queue\LinkedQueue.cs" />

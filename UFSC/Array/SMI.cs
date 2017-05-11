@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests {
+namespace Array {
     public class SMI<T> {
 
         public static void Test() {

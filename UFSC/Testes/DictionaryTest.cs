@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests {
+namespace Testes {
     public class DictionaryTest {
         public static void test1() {
             Dictionary<int, something> file = new Dictionary<int, something>();

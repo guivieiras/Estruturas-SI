@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared {
+namespace Elements {
     public class DoublyLinkedElement<T> {
 
         private DoublyLinkedElement<T> next;

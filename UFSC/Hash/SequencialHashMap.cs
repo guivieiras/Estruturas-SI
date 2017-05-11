@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Elements;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests {
+namespace Hash {
     public class SequencialHashMap<K, V> {
         private DoublyLinkedKeyValue<K, V> first;
         private DoublyLinkedKeyValue<K, V> last;

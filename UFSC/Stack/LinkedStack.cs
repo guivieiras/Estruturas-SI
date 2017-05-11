@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Elements;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests {
+namespace Stack {
     public class LinkedStack<T> {
 
         public static void Test() {

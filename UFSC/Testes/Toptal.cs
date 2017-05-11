@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests {
+namespace Testes {
     class Toptal {
 
         public static object[] flattened (object[] nested) {
@@ -12,7 +12,7 @@ namespace Tests {
 
             foreach (object element in nested) {
       
-                if (element  is Array) {
+                if (element  is System.Array) {
                     flat.AddRange( flattened(element as object[]));
                 }else {
                     flat.Add(element);
