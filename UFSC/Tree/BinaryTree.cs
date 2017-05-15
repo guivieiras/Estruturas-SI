@@ -29,8 +29,8 @@ namespace Tree
             BinaryTree<int> tree3 = new BinaryTree<int>();
 
             Random rnd = new Random();
-            int[] varios = new int[100];
-            for (int i = 0; i < 100; i++)
+            int[] varios = new int[1000];
+            for (int i = 0; i < 1000; i++)
             {
                 int a = rnd.Next(0, 1000000);
                 varios[i] = a;
@@ -51,13 +51,13 @@ namespace Tree
             string xxa = string.Join(", ", tree3.InOrder());
             s.Stop();
             Console.WriteLine("InOrder:".MetricJoin(s.Elapsed.ToString(), 19));
+            Thread.Sleep(100);
 
             s.Restart();
             string xa = string.Join(", ", tree3.RecursiveInOrder());
             s.Stop();
             Console.WriteLine("RecursiveInOrder:".MetricJoin(s.Elapsed.ToString(), 19));
-
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
 
             s.Restart();
             tree3.PrintInOrder2();
@@ -68,7 +68,7 @@ namespace Tree
             tree3.z.Clear();
             //  BinaryTree<int> tre = new BinaryTree<int>();
             //tre.RecursiveAdd(5, 1, 4, 9, 2, 3, 8, 6, 7);
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
 
 
             s.Restart();
@@ -79,7 +79,7 @@ namespace Tree
 
             tree3.x.Clear();
             GC.Collect();
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
 
 
             s.Restart();
@@ -87,17 +87,21 @@ namespace Tree
             string pt3 = string.Join(", ", tree3.x);
             s.Stop();
             Console.WriteLine("Print in order 1:".MetricJoin(s.Elapsed.ToString(), 19));
+            Thread.Sleep(100);
+
 
             s.Restart();
+            //tree3.PreOrder();
             string pt4 = string.Join(", ", tree3.PreOrder());
             s.Stop();
             Console.WriteLine("Pre order:".MetricJoin(s.Elapsed.ToString(), 19));
-            Console.WriteLine(pt4);
+      
+            //    Console.WriteLine(pt4);
 
             BinaryTree<string> STR = new BinaryTree<string>();
             STR.Add("F", "B", "A", "D", "C", "E", "G", "I", "H");
 
-            Console.WriteLine(string.Join(", ", STR.PreOrder()));
+        //    Console.WriteLine(string.Join(", ", STR.PreOrder()));
         }
 
         public bool Contains(T value)
@@ -313,11 +317,11 @@ namespace Tree
 
         }
 
-        private List<T> preOrderBuffer = new List<T>();
+        private Trabalho01.ArrayLinkedList<T> preOrderBuffer = new Trabalho01.ArrayLinkedList<T>(1000);
 
-        public List<T> PreOrder()
+        public Trabalho01.ArrayLinkedList<T> PreOrder()
         {
-            preOrderBuffer.Clear();
+            //preOrderBuffer.Clear();
             PreOrder(root);
             return preOrderBuffer;
         }
