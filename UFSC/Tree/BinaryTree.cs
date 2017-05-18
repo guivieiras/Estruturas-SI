@@ -95,13 +95,13 @@ namespace Tree
             string pt4 = string.Join(", ", tree3.PreOrder());
             s.Stop();
             Console.WriteLine("Pre order:".MetricJoin(s.Elapsed.ToString(), 19));
-      
+
             //    Console.WriteLine(pt4);
 
             BinaryTree<string> STR = new BinaryTree<string>();
             STR.Add("F", "B", "A", "D", "C", "E", "G", "I", "H");
 
-        //    Console.WriteLine(string.Join(", ", STR.PreOrder()));
+            //    Console.WriteLine(string.Join(", ", STR.PreOrder()));
         }
 
         public bool Contains(T value)
@@ -208,7 +208,18 @@ namespace Tree
             }
         }
 
-        private void RecursiveAdd(BinaryTreeElement<T> previous, T value)
+        internal int GetHeigth(BinaryTreeElement<T> element)
+        {
+            int h = 0;
+            while (element.Parent != null)
+            {
+                element = element.Parent;
+                h++;
+            }
+            return h;
+        }
+
+        internal BinaryTreeElement<T> RecursiveAdd(BinaryTreeElement<T> previous, T value)
         {
             if (value.CompareTo(previous.Value) == -1)
             {
@@ -217,13 +228,14 @@ namespace Tree
                     BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
                     previous.Left = el;
                     el.Parent = previous;
-                    if (first.Value.CompareTo(value) == 1)
+                    if (first != null && first.Value.CompareTo(value) == 1)
                         first = el;
 
+                    return el;
                 }
                 else
                 {
-                    RecursiveAdd(previous.Left, value);
+                    return RecursiveAdd(previous.Left, value);
                 }
             }
             if (value.CompareTo(previous.Value) == 1)
@@ -233,12 +245,15 @@ namespace Tree
                     BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
                     previous.Right = el;
                     el.Parent = previous;
+
+                    return el;
                 }
                 else
                 {
-                    RecursiveAdd(previous.Right, value);
+                    return RecursiveAdd(previous.Right, value);
                 }
             }
+            return null;
         }
 
         public void PrintInOrder1()

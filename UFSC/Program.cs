@@ -10,7 +10,7 @@ namespace Tests {
         public static void Main(string[] args) {
            // SimpleArrayLinkedList.Test();
            // ArrayLinkedList<string>.Test();
-            BinaryTree<int>.Test();
+            AvidBinaryTree<int>.Test();
             Console.ReadKey();
         }
     }
