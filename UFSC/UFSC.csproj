@@ -46,7 +46,7 @@
     <Compile Include="Array\SMI.cs" />
     <Compile Include="Extension\ExtensionMethods.cs" />
     <Compile Include="Trabalho01\ArrayLinkedList.cs" />
-    <Compile Include="Tree\AvidBinaryTree.cs" />
+    <Compile Include="Tree\AVLTree.cs" />
     <Compile Include="Tree\BinaryTree.cs" />
     <Compile Include="Tree\BinaryTreeElement.cs" />
     <Compile Include="Testes\DictionaryTest.cs" />

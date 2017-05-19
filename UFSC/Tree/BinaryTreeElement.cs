@@ -11,8 +11,11 @@ namespace Tree {
         public BinaryTreeElement<T> Left { get; set; }
         public BinaryTreeElement<T> Right { get; set; }
 
+        public int Height { get; set; }
+
         public BinaryTreeElement(T value) {
             Value = value;
+            Height = 1;
         }
 
         public T Value { get; set; }

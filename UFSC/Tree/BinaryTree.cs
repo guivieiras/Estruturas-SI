@@ -208,17 +208,6 @@ namespace Tree
             }
         }
 
-        internal int GetHeigth(BinaryTreeElement<T> element)
-        {
-            int h = 0;
-            while (element.Parent != null)
-            {
-                element = element.Parent;
-                h++;
-            }
-            return h;
-        }
-
         internal BinaryTreeElement<T> RecursiveAdd(BinaryTreeElement<T> previous, T value)
         {
             if (value.CompareTo(previous.Value) == -1)
