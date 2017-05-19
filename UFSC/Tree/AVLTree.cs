@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace Tree
             System.Diagnostics.Stopwatch s = new System.Diagnostics.Stopwatch();
 
             s.Start();
-            string xxa = string.Join(", ", tree.InOrder());
+            string xxa = string.Join(", ", tree.RecursiveInOrder());
             s.Stop();
             Console.WriteLine("InOrder:".MetricJoin(s.Elapsed.ToString(), 19));
 
@@ -42,25 +42,62 @@ namespace Tree
             //tree3.RecursiveAdd(5, 6, 2, 1, 3, 0); //Deu boa pra direita
             //tree3.RecursiveAdd(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11); //Deu boa  tree3.RecursiveAdd(12); 
 
-            tree.RecursiveAdd(42, 88, 15, 6, 27,34); //Dupla pra direita
+            //tree.RecursiveAdd(42, 88, 15, 6, 27,34); //Dupla pra direita deu boa
+
+            //tree.RecursiveAdd(42, 15, 88, 67, 94, 51); //Dupla pra esquerda deu boa
+
+            tree.RecursiveAdd(8, 10, 4, 2, 6, 9, 1, 3, 5, 7);
+            tree.Remove(9);
 
             //Testar para esquerda
         }
-
-
-
-        public new void Add(params T[] value)
+        public void Remove(T value)
         {
-            foreach (var v in value)
-            {
-                if (!Contains(v))
-                    Add(v);
-            }
+            if (root == null)
+                throw new Exception();
+            Remove(root, value);
         }
-        public new void Add(IEnumerable<T> value)
+
+        private void Remove(BinaryTreeElement<T> iterator, T value)
         {
-            foreach (var v in value)
-                Add(v);
+            if (iterator.Value.Equals(value))
+                Remove(iterator);
+            else
+            if (iterator.Value.CompareTo(value) == 1)
+
+                if (iterator.Left != null)
+                {
+                    Remove(iterator.Left, value);
+                }
+                else throw new Exception();
+
+            else
+            if (iterator.Value.CompareTo(value) == -1)
+                if (iterator.Right != null)
+                {
+                    Remove(iterator.Right, value);
+                }
+                else throw new Exception();
+
+            if (recalcHeigth)
+                TryRotate(iterator, true);
+        }
+
+        private void Remove(BinaryTreeElement<T> element)
+        {
+            var highest = getHighest(element);
+            element.Value = highest.Value;
+
+            if (highest.Parent.Right == highest)
+                highest.Parent.Right = null;
+            if (highest.Parent.Left == highest)
+                highest.Parent.Left = null;
+        }
+
+        private BinaryTreeElement<T> getHighest(BinaryTreeElement<T> root)
+        {
+            if (root.Right != null) return getHighest(root.Right);
+            return root;
         }
 
         bool recalcHeigth = true;
@@ -95,7 +132,6 @@ namespace Tree
                 else
                 {
                     RecursiveAdd(previous.Right, value);
-
                 }
             }
             if (recalcHeigth)
@@ -107,13 +143,19 @@ namespace Tree
 
         private BinaryTreeElement<T> child;
         private T added;
-        public void TryRotate(BinaryTreeElement<T> itr)
+        public void TryRotate(BinaryTreeElement<T> itr, bool isRemoving = false)
         {
-            if (child.Height == itr.Height)
+            if (child.Height == itr.Height && !isRemoving)
                 itr.Height++;
 
             if (itr.Left != null && itr.Height - itr.Left.Height > 2 || (itr.Left == null && itr.Height > 2))
             {
+                if (isRemoving)
+                {
+                    itr.Height++;
+                    itr.Right.Height++;
+                }
+                else
                 if (added.CompareTo(itr.Right.Value) == -1)
                 {
                     itr.Right.Height++;
@@ -122,9 +164,16 @@ namespace Tree
                 }
 
                 RotateLeft(itr);
-            }
+            } else
+
             if (itr.Right != null && itr.Height - itr.Right.Height > 2 || (itr.Right == null && itr.Height > 2))
             {
+                if (isRemoving)
+                {
+                    itr.Height++;
+                    itr.Left.Height++;
+                }
+                else
                 if (added.CompareTo(itr.Left.Value) == 1)
                 {
                     itr.Left.Height++;
@@ -133,6 +182,9 @@ namespace Tree
                 }
 
                 RotateRight(itr);
+            }else if (isRemoving)
+            {
+                itr.Height--;
             }
 
             child = itr;
@@ -221,11 +273,6 @@ namespace Tree
                 }
             }
 
-        }
-
-        public new void Add(T value)
-        {
-            base.Add(value);
         }
     }
 }

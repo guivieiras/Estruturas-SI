@@ -13,18 +13,16 @@ namespace Tree
     {
 
         private BinaryTreeElement<T> root;
-        private BinaryTreeElement<T> first;
-        private BinaryTreeElement<T> last;
 
         public static void Test()
         {
             BinaryTree<int> tree = new BinaryTree<int>();
 
             // tree.Add(1, 5, 7, 2, 3, 8);
-            tree.Add(4, 2, 6, 1, 3, 5, 7);
+            tree.RecursiveAdd(4, 2, 6, 1, 3, 5, 7);
 
             BinaryTree<string> tree2 = new BinaryTree<string>();
-            tree2.Add("d", "b", "f", "a", "c", "e", "g");
+            tree2.RecursiveAdd("d", "b", "f", "a", "c", "e", "g");
 
             BinaryTree<int> tree3 = new BinaryTree<int>();
 
@@ -39,8 +37,8 @@ namespace Tree
             //  tree3.Add(7, 1, 9, 0, 3, 8, 10, 2, 5, 4, 6);
             tree3.Add(varios);
 
-            Console.WriteLine(string.Join(", ", tree.InOrder()));
-            Console.WriteLine(string.Join(", ", tree2.InOrder()));
+            Console.WriteLine(string.Join(", ", tree.RecursiveInOrder()));
+            Console.WriteLine(string.Join(", ", tree2.RecursiveInOrder()));
 
 
             Console.WriteLine();
@@ -48,9 +46,9 @@ namespace Tree
             System.Diagnostics.Stopwatch s = new System.Diagnostics.Stopwatch();
 
             s.Start();
-            string xxa = string.Join(", ", tree3.InOrder());
+            string xxa = string.Join(", ", tree3.RecursiveInOrder());
             s.Stop();
-            Console.WriteLine("InOrder:".MetricJoin(s.Elapsed.ToString(), 19));
+            Console.WriteLine("RecursiveInOrder:".MetricJoin(s.Elapsed.ToString(), 19));
             Thread.Sleep(100);
 
             s.Restart();
@@ -99,7 +97,7 @@ namespace Tree
             //    Console.WriteLine(pt4);
 
             BinaryTree<string> STR = new BinaryTree<string>();
-            STR.Add("F", "B", "A", "D", "C", "E", "G", "I", "H");
+            STR.RecursiveAdd("F", "B", "A", "D", "C", "E", "G", "I", "H");
 
             //    Console.WriteLine(string.Join(", ", STR.PreOrder()));
         }
@@ -108,52 +106,43 @@ namespace Tree
         {
             if (root == null)
                 return false;
-            return Contains(root, value);
+            return GetElement(root, value) != null;
         }
 
-        private bool Contains(BinaryTreeElement<T> iterator, T value)
+        private BinaryTreeElement<T> GetElement(BinaryTreeElement<T> iterator, T value)
         {
             if (iterator.Value.Equals(value))
-                return true;
+                return iterator;
             if (iterator.Value.CompareTo(value) == 1)
             {
                 if (iterator.Left != null)
                 {
-                    return Contains(iterator.Left, value);
+                    return GetElement(iterator.Left, value);
                 }
-                else return false;
+                else return null;
             }
             else
 
             if (iterator.Right != null)
             {
-                return Contains(iterator.Right, value);
+                return GetElement(iterator.Right, value);
             }
-            else return false;
+            else return null;
         }
 
-        public void Add(params T[] value)
-        {
-            foreach (var v in value)
-            {
-                if (!Contains(v))
-                    Add(v);
-            }
-        }
         public void Add(IEnumerable<T> value)
         {
             foreach (var v in value)
-                Add(v);
+                RecursiveAdd(v);
         }
 
         public void RecursiveAdd(params T[] value)
         {
             foreach (var x in value)
             {
-                if (first == null)
+                if (root == null)
                 {
                     BinaryTreeElement<T> el = new BinaryTreeElement<T>(x);
-                    first = el;
                     root = el;
 
                 }
@@ -162,51 +151,49 @@ namespace Tree
             }
         }
 
-        public void Add(T value)
-        {
-            BinaryTreeElement<T> element = new BinaryTreeElement<T>(value);
+        //public void Add(T value)
+        //{
+        //    BinaryTreeElement<T> element = new BinaryTreeElement<T>(value);
 
-            if (root == null)
-            {
-                root = element;
-                first = element;
-                last = element;
-                return;
-            }
+        //    if (root == null)
+        //    {
+        //        root = element;
+        //        return;
+        //    }
 
-            var iterator = root;
+        //    var iterator = root;
 
-            while (true)
-            {
+        //    while (true)
+        //    {
 
-                if (iterator.Value.CompareTo(value) == 1)
-                {
-                    if (iterator.Left != null)
-                        iterator = iterator.Left;
-                    else
-                    {
-                        iterator.Left = element;
-                        element.Parent = iterator;
-                        if (element.Value.CompareTo(first.Value) == -1)
-                            first = element;
-                        break;
-                    }
-                }
-                else if (iterator.Value.CompareTo(value) == -1)
-                {
-                    if (iterator.Right != null)
-                        iterator = iterator.Right;
-                    else
-                    {
-                        iterator.Right = element;
-                        element.Parent = iterator;
-                        if (element.Value.CompareTo(last.Value) == 1)
-                            last = element;
-                        break;
-                    }
-                }
-            }
-        }
+        //        if (iterator.Value.CompareTo(value) == 1)
+        //        {
+        //            if (iterator.Left != null)
+        //                iterator = iterator.Left;
+        //            else
+        //            {
+        //                iterator.Left = element;
+        //                element.Parent = iterator;
+        //                if (element.Value.CompareTo(first.Value) == -1)
+        //                    first = element;
+        //                break;
+        //            }
+        //        }
+        //        else if (iterator.Value.CompareTo(value) == -1)
+        //        {
+        //            if (iterator.Right != null)
+        //                iterator = iterator.Right;
+        //            else
+        //            {
+        //                iterator.Right = element;
+        //                element.Parent = iterator;
+        //                if (element.Value.CompareTo(last.Value) == 1)
+        //                    last = element;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
 
         internal BinaryTreeElement<T> RecursiveAdd(BinaryTreeElement<T> previous, T value)
         {
@@ -217,8 +204,6 @@ namespace Tree
                     BinaryTreeElement<T> el = new BinaryTreeElement<T>(value);
                     previous.Left = el;
                     el.Parent = previous;
-                    if (first != null && first.Value.CompareTo(value) == 1)
-                        first = el;
 
                     return el;
                 }
@@ -287,39 +272,39 @@ namespace Tree
 
         }
 
-        public IEnumerable<T> InOrder()
-        {
-            BinaryTreeElement<T> iterator = first;
-            T lastReturned = default(T);
-            bool firstIterate = true;
+        //public IEnumerable<T> InOrder()
+        //{
+        //    BinaryTreeElement<T> iterator = first;
+        //    T lastReturned = default(T);
+        //    bool firstIterate = true;
 
-            while (true)
-            {
-                if (firstIterate || lastReturned.CompareTo(iterator.Value) == -1 && (iterator.Left == null || lastReturned.CompareTo(iterator.Left.Value) != -1))
-                {
-                    yield return iterator.Value;
-                    lastReturned = iterator.Value;
-                    firstIterate = false;
-                    if (iterator == last)
-                        break;
-                }
+        //    while (true)
+        //    {
+        //        if (firstIterate || lastReturned.CompareTo(iterator.Value) == -1 && (iterator.Left == null || lastReturned.CompareTo(iterator.Left.Value) != -1))
+        //        {
+        //            yield return iterator.Value;
+        //            lastReturned = iterator.Value;
+        //            firstIterate = false;
+        //            if (iterator == last)
+        //                break;
+        //        }
 
-                if (iterator.Left == null && iterator.Right == null)
-                {
-                    iterator = iterator.Parent;
-                }
-                else if (iterator.Left != null && lastReturned.CompareTo(iterator.Left.Value) != 1)
-                {
-                    iterator = iterator.Left;
-                }
-                else if (iterator.Right != null && lastReturned.CompareTo(iterator.Right.Value) == -1)
-                {
-                    iterator = iterator.Right;
-                }
-                else iterator = iterator.Parent;
-            }
+        //        if (iterator.Left == null && iterator.Right == null)
+        //        {
+        //            iterator = iterator.Parent;
+        //        }
+        //        else if (iterator.Left != null && lastReturned.CompareTo(iterator.Left.Value) != 1)
+        //        {
+        //            iterator = iterator.Left;
+        //        }
+        //        else if (iterator.Right != null && lastReturned.CompareTo(iterator.Right.Value) == -1)
+        //        {
+        //            iterator = iterator.Right;
+        //        }
+        //        else iterator = iterator.Parent;
+        //    }
 
-        }
+        //}
 
         private Trabalho01.ArrayLinkedList<T> preOrderBuffer = new Trabalho01.ArrayLinkedList<T>(1000);
 
