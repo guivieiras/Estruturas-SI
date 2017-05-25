@@ -47,6 +47,10 @@
     <Compile Include="Extension\ExtensionMethods.cs" />
     <Compile Include="Trabalho01\ArrayLinkedList.cs" />
     <Compile Include="Tree\AVLTree.cs" />
+    <Compile Include="Tree\BTree.cs" />
+    <Compile Include="Tree\Descendente.cs" />
+    <Compile Include="Tree\Element.cs" />
+    <Compile Include="Tree\GenericBTree.cs" />
     <Compile Include="Tree\BinaryTree.cs" />
     <Compile Include="Tree\BinaryTreeElement.cs" />
     <Compile Include="Testes\DictionaryTest.cs" />
@@ -65,6 +69,11 @@
     <Compile Include="Hash\SequencialHashMap.cs" />
     <Compile Include="Trabalho01\SimpleArrayLinkedList.cs" />
     <Compile Include="Testes\Toptal.cs" />
+    <Compile Include="Tree\GenericKey.cs" />
+    <Compile Include="Tree\GenericKnot.cs" />
+    <Compile Include="Tree\GenericElement.cs" />
+    <Compile Include="Tree\Key.cs" />
+    <Compile Include="Tree\Knot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
