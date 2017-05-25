@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UFSC.Tree
 {
-    interface class Descendente
+    interface IDescendente
     {
     }
 }

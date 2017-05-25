@@ -8,10 +8,19 @@ namespace UFSC.Tree
 {
     class Key : IComparable
     {
-        public Descendente Left { get; set; }
-        public Descendente Right { get; set; }
+        public Key(int value)
+        {
+            Value = value;
+        }
+
+        public IDescendente Left { get; set; }
+        public IDescendente Right { get; set; }
 
         public int Value { get; set; }
+
+        public bool First { get {
+                return (Right == null && Left != null);
+            } }
 
         public int CompareTo(object obj)
         {

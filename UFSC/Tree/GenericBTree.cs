@@ -8,7 +8,7 @@ namespace UFSC.Tree
 {
     class GenericBTree<K> where K:IComparable
     {
-        public GenericKnot<K> Root { get; set; }
+        public GenericNode<K> Root { get; set; }
 
         public int Degree { get; set; }
 
@@ -19,7 +19,7 @@ namespace UFSC.Tree
 
         public void Add(K value)
         {
-            new GenericKey<k>
+            new GenericKey<K>();
         }
     }
 }

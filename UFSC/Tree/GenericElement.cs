@@ -13,7 +13,7 @@ namespace UFSC.Tree
         public GenericElement(V value)
         {
             Value = value;
-            System.Collections.Hashtable a = new System.Collections.Hashtable()
+            System.Collections.Hashtable a = new System.Collections.Hashtable();
         }
     }
 }

@@ -70,10 +70,10 @@
     <Compile Include="Trabalho01\SimpleArrayLinkedList.cs" />
     <Compile Include="Testes\Toptal.cs" />
     <Compile Include="Tree\GenericKey.cs" />
-    <Compile Include="Tree\GenericKnot.cs" />
+    <Compile Include="Tree\GenericNode.cs" />
     <Compile Include="Tree\GenericElement.cs" />
     <Compile Include="Tree\Key.cs" />
-    <Compile Include="Tree\Knot.cs" />
+    <Compile Include="Tree\Node.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace UFSC.Tree
 {
-    class Element : Descendente
+    class Element : IDescendente
     {
+        public Element(int value)
+        {
+            Value = value;
+        }
+
         public int Value { get; set; }
     }
 }

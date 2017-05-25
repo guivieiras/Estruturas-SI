@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UFSC.Tree
 {
-    class GenericKnot<K> where K : IComparable
+    class GenericNode<K> where K : IComparable
     {
         public List<GenericKey<K>> Keys = new List<GenericKey<K>>();
     }
