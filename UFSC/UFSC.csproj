@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,6 +59,7 @@
     <Compile Include="Elements\DoublyLinkedElement.cs" />
     <Compile Include="Elements\DoublyLinkedKeyValue.cs" />
     <Compile Include="Queue\Fila.cs" />
+    <Compile Include="MultiList\MultiList.cs" />
     <Compile Include="DEQUE\LinkedDeque.cs" />
     <Compile Include="Elements\LinkedElement.cs" />
     <Compile Include="Queue\LinkedQueue.cs" />

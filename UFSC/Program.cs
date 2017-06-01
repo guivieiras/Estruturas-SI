@@ -12,10 +12,9 @@ namespace Tests {
             // SimpleArrayLinkedList.Test();
             // ArrayLinkedList<string>.Test();
             //   AVLTree<int>.Test();
-            BTree.Test();
-            Console.WriteLine(6 / 2);
-            Console.WriteLine(5 / 2);
-            Console.WriteLine(4 / 2);
+            //BTree.Test();
+            Multilist.Test();
+           
             Console.ReadKey();
         }
     }
