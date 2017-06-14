@@ -95,16 +95,19 @@ public class Diretorios
     }
 }
 
-public abstract class GenericDiretorios<K, T>
+//K = chave da classe, T = tipo da classe
+public abstract class ListaInvertida<K, T>
 {
 
-    //         Dicionario com nome do atributo como chave e dicionario como valor do atributo como chave com valores no
+    //Dicionario com nome do atributo como chave e valor um dicionario, chave dinamica = valor do atributo, valor = id's dos alunos que tem esse valor nesse atributo
     public Dictionary<string, Dictionary<dynamic, List<K>>> directories { get; set; }
     public List<PropertyInfo> properties;
+    public List<T> items { get; set; } = new List<T>();
 
-    public GenericDiretorios(List<PropertyInfo> properties)
+
+    public ListaInvertida()
     {
-        this.properties = properties;
+        this.properties = GetPropriedades();
 
         directories = new Dictionary<string, Dictionary<dynamic, List<K>>>();
 
@@ -114,28 +117,34 @@ public abstract class GenericDiretorios<K, T>
         });
     }
 
-    public abstract K GetKey(T value);
+    public abstract K GetKey(T item);
 
-    public void Add(T aluno)
+    public void Add(T item)
     {
+        items.Add(item);
+
         properties.ForEach(property =>
         {
-            if (!directories[property.Name].ContainsKey(property.GetValue(aluno)))
+            if (!directories[property.Name].ContainsKey(property.GetValue(item)))
             {
-                directories[property.Name].Add(property.GetValue(aluno), new List<K>());
+                directories[property.Name].Add(property.GetValue(item), new List<K>());
             }
 
-            directories[property.Name][property.GetValue(aluno)].Add(GetKey(aluno));
+            directories[property.Name][property.GetValue(item)].Add(GetKey(item));
         });
+    }
+
+    public List<PropertyInfo> GetPropriedades()
+    {
+        return typeof(T).GetProperties().Where
+            (x => x.CustomAttributes.Where
+                (o => o.AttributeType == typeof(KeyAttribute)
+                || o.AttributeType == typeof(NotMappedAttribute)).Count() == 0).ToList();
     }
 }
 
-public class AlunoDirectory : GenericDiretorios<int, Aluno>
+public class Alunos : ListaInvertida<int, Aluno>
 {
-    public AlunoDirectory(List<PropertyInfo> properties) : base(properties)
-    {
-    }
-
     public override int GetKey(Aluno value)
     {
         return value.Id;
@@ -156,7 +165,7 @@ public class Multilist
         //a = new Aluno(2, "A", "Big", "CCO", "CRI");
         //am.Add(a);
 
-        GenericAlunoMultilist am2 = new GenericAlunoMultilist();
+        Alunos am2 = new Alunos();
         var big = new Cidade("Big");
         var s = new Cidade("São");
         Aluno
@@ -166,44 +175,6 @@ public class Multilist
         am2.Add(a);
         a = new Aluno(2, "A", big, "CCO", "CRI");
         am2.Add(a);
-    }
-}
-
-public class GenericAlunoMultilist
-{
-
-
-
-    public List<Aluno> alunos { get; set; }
-    public AlunoDirectory diretorios { get; set; }
-
-    //Nome da ciade/curso/time como string e id do aluno como int, obtendo um diretorio de chave string e valores int
-    public GenericAlunoMultilist()
-    {
-        diretorios = new AlunoDirectory(properties(typeof(Aluno)));
-    }
-
-    public void Add(Aluno aluno)
-    {
-        diretorios.Add(aluno);
-    }
-
-    public static List<PropertyInfo> properties(Type type)
-    {
-        return type.GetProperties().Where
-            (x => x.CustomAttributes.Where
-                (o => o.AttributeType == typeof(KeyAttribute)
-                || o.AttributeType == typeof(NotMappedAttribute)).Count() == 0).ToList();
-    }
-
-    public static List<string> PropertiesNames(Type type)
-    {
-        var q = type.GetProperties().Where
-            (x => x.CustomAttributes.Where
-                (o => o.AttributeType == typeof(KeyAttribute)
-                || o.AttributeType == typeof(NotMappedAttribute)).Count() == 0).Select(a => a.Name);
-
-        return q.ToList();
     }
 }
 
