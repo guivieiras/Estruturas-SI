@@ -46,6 +46,13 @@
     <Compile Include="DEQUE\ArrayDeque.cs" />
     <Compile Include="Array\SMI.cs" />
     <Compile Include="Extension\ExtensionMethods.cs" />
+    <Compile Include="MultiList\Aluno.cs" />
+    <Compile Include="MultiList\AlunosInvertedCollection.cs" />
+    <Compile Include="MultiList\AlunosInvertedContinuousCollection.cs" />
+    <Compile Include="MultiList\Cidade.cs" />
+    <Compile Include="MultiList\AlunoMultilist.cs" />
+    <Compile Include="MultiList\ListaContinuaInvertida.cs" />
+    <Compile Include="MultiList\ListaInvertida.cs" />
     <Compile Include="Trabalho01\ArrayLinkedList.cs" />
     <Compile Include="Tree\AVLTree.cs" />
     <Compile Include="Tree\BTree.cs" />
