@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tree;
+using UFSC.Trabalho02;
 using UFSC.Tree;
 
 namespace Tests {
@@ -13,8 +14,9 @@ namespace Tests {
             // ArrayLinkedList<string>.Test();
             //   AVLTree<int>.Test();
             //BTree.Test();
-            Multilist.Test();
-           
+            //Multilist.Test();
+            Game game = new Game();
+            game.ShowMainScreen();
             Console.ReadKey();
         }
     }

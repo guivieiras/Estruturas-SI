@@ -35,6 +35,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +56,11 @@
     <Compile Include="MultiList\ListaContinuaInvertida.cs" />
     <Compile Include="MultiList\ListaInvertida.cs" />
     <Compile Include="Trabalho01\ArrayLinkedList.cs" />
+    <Compile Include="Trabalho02\AnimalNode.cs" />
+    <Compile Include="Trabalho02\Game.cs" />
+    <Compile Include="Trabalho02\Node.cs" />
+    <Compile Include="Trabalho02\QuestionNode.cs" />
+    <Compile Include="Trabalho02\Tree.cs" />
     <Compile Include="Tree\AVLTree.cs" />
     <Compile Include="Tree\BTree.cs" />
     <Compile Include="Tree\Descendente.cs" />
