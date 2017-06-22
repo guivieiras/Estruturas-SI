@@ -29,6 +29,7 @@ namespace UFSC.Trabalho02
             }
 
             var tuple = RecursiveAsker(tree.Root);
+            Console.Clear();
             ShowResult(tuple);
             ShowMainScreen();
         }
@@ -117,8 +118,6 @@ namespace UFSC.Trabalho02
 
         public void ShowResult(Tuple<QuestionNode, AnimalNode> tuple)
         {
-            Console.Clear();
-
             //Caso seja nulo o item encontrado, ocorre ao adicionar o segundo item na arvore
             if (tuple.Item2 == null)
             {
@@ -129,7 +128,7 @@ namespace UFSC.Trabalho02
             var resposta = Console.ReadLine();
 
             if (resposta == "s")
-                Console.WriteLine("I'M GROWING STRONGER");
+                Console.WriteLine(";)");
             else if (resposta == "n")
                 ShowNewQA(tuple.Item1, tuple.Item2);
             else
@@ -137,7 +136,6 @@ namespace UFSC.Trabalho02
                 Console.WriteLine("Não entendi");
                 ShowResult(tuple);
             }
-
         }
 
         public Tuple<QuestionNode,AnimalNode> RecursiveAsker(QuestionNode question)
@@ -185,7 +183,7 @@ namespace UFSC.Trabalho02
             //Ocorre apenas no primeiro animal na esquerda do root.
             if (foundAnimal == null)
             {
-                Console.Write("Animal não encontrado, escreva o nome do animal no qual você pensou: ");
+                Console.Write("Não conheço esse animal, escreva o nome do animal no qual você pensou: ");
                 string animal = Console.ReadLine();
 
                 tree.AddAnimal(lastQuestion, false, animal);
